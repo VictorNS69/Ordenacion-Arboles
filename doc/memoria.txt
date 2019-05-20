@@ -53,4 +53,20 @@ Autores:
 		
 	6- menor_o_igual(p(a),q).
 		yes.
+
+  lista_hojas/2 Dada una lista, devuelve otra con las hojas
+  que compondrán el árbol
+
+	1- lista_hojas([1,2],H).
+		H = [tree(1,void,void),tree(2,void,void)]
+
+	2- lista_hojas([1,2,3],H).
+		H = [tree(1,void,void),tree(2,void,void),tree(3,void,void)]
+
+	3- lista_hojas([],H).
+		H = []
+
+	4- lista_hojas([a,b,c],H).
+		H = [tree(a,void,void),tree(b,void,void),tree(c,void,void)]
+
 		
