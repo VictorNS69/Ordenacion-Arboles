@@ -8,23 +8,31 @@ alumno_prode('Perez','Morgera','Daniel','X150284').
 menor(A,B,=,A):-
 	A=B.
 menor(A,B,<,A):- 
-	A<B.
+	A@<B.
 menor(A,B,=<,A):- 
-	A=<B,!.
+	A@=<B,!.
 menor(A,B,>,A):- 
-	A>B.
+	A@>B.
 menor(A,B,>=,A):- 
-	A>=B,!.
+	A@>=B,!.
 menor(A,B,<,B):- 
-	B<A.
+	B@<A.
 menor(A,B,=<,B):- 
-	B=<A,!.
+	B@=<A,!.
 menor(A,B,>,B):- 
-	B>A.
+	B@>A.
 menor(A,B,>=,B):- 
-	B>=A,!.
+	B@>=A,!.
 
 % determina si su primer argumento es menor o igual al segundo
+menor_o_igual(A,B):-
+	functor(A,PA,_),
+	functor(B,PB,_),
+	PA@<PB,!.
+menor_o_igual(A,B):-
+	functor(A,PA,_),
+	functor(B,PB,_),
+	PA@>PB,!.
 menor_o_igual(A,B):-
 	functor(A,_,FA),
 	functor(B,_,FB),
@@ -40,13 +48,24 @@ menor_o_igual(A,B):-
 	FA=FB,
 	A=..XA,
 	B=..XB,
-	aux(XA,XB).
-%	arg(1,A,VA),
-%	arg(1,B,VB),
-%	VA@<VB,	
-%	menor_o_igual(A,B).
-aux([A|A2],[B|B2]):-
+	comparar_listas(XA,XB).
+
+% compara si cada uno de los elementos es menor o mayor en cada lista
+comparar_listas([],[]).
+comparar_listas([A|_],[B|_]):-
 	A@<B,
-	aux(A2,B2).
-	
-	
+	true.
+comparar_listas([A|A2],[B|B2]):-
+	A=B,
+	comparar_listas(A2,B2).
+comparar_listas([A|_],[B|_]):-
+	A@>B,
+	false.
+
+% dada una lista, devuelve otra con las hojas que compondrán el árbol	
+%lista_hojas([1,2,3],Hojas)
+%Hojas = [tree(1,void,void),tree(2,void,void),tree(3,void,void)]
+lista_hojas([],[]).
+lista_hojas([L|Resto],[tree(L,void,void)|H]):-
+	lista_hojas(Resto,H).
+
