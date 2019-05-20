@@ -1,0 +1,56 @@
+Autores:
+  - Víctor Nieves Sánchez, x150375
+  - Daniel Morgera Pérez, x150284
+  - Alejandro Carmona Ayllón, x150151
+  
+  %--------------------Principales--------------------
+  menor/4 Indica que número es menor, pasandole dos números y un criterio de comparación.
+  
+  Pruebas:
+	
+	1- menor(3,4,<,M).
+		M=3
+		
+	2- menor(3,4,>,M).
+		M=4
+		
+	3- menor(4,4,>,M).
+		no
+		
+	4- menor(4,4,>=,M).
+		M=4
+		
+	5- menor(4,4,=,M).
+		M=4
+		
+	6- menor(4,3,=,M).
+		no
+	
+	7- menor(a,b,<,M).
+		M=a
+		
+  menor_o_igual/2 Determina si su primer argumento es menor o igual al segundo de la siguiente manera:
+  si su nombre es menor que el otro, si sus nombres son iguales pero su aridad es menor que el otro,
+  si sus nombres y aridad son iguales pero alguno de los argumentos del primer termino es menor que 
+  alguno de los argumentos del segundo termino.
+  
+  Pruebas:
+	
+	1- menor_o_igual([1],[1,2]).
+		yes.
+		
+	2- menor_o_igual(a(c(2)),b(1,2,2)).
+		yes.
+	
+	3- menor_o_igual(a(c),b(d)).
+		yes.
+		
+	4- menor_o_igual(a(1),b(1)).
+		yes.
+		
+	5- menor_o_igual(b(1),b(1)).
+		yes.
+		
+	6- menor_o_igual(p(a),q).
+		yes.
+		
