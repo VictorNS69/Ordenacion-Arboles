@@ -5,24 +5,34 @@ alumno_prode('Ayllon','Carmona','Alejandro','X150251').
 alumno_prode('Perez','Morgera','Daniel','X150284').
 
 % devuelve en M el menor entre A y B usando Comp como criterio de comparación.
-menor(A,B,=,A):-
-	A=B.
-menor(A,B,<,A):- 
-	A@<B.
-menor(A,B,=<,A):- 
-	A@=<B,!.
-menor(A,B,>,A):- 
-	A@>B.
-menor(A,B,>=,A):- 
-	A@>=B,!.
-menor(A,B,<,B):- 
-	B@<A.
-menor(A,B,=<,B):- 
-	B@=<A,!.
-menor(A,B,>,B):- 
-	B@>A.
-menor(A,B,>=,B):- 
-	B@>=A,!.
+
+
+menor(A,B,Comp,M):-
+	functor(X,Comp,2),
+	arg(1,X,A),
+	arg(2,X,B),
+	call(X),
+	M=A,!.
+menor(A,B,Comp,M):-
+	functor(X,Comp,2),
+	arg(1,X,A),
+	arg(2,X,B),
+	\+ call(X),
+	M=B,!.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 % determina si su primer argumento es menor o igual al segundo
 menor_o_igual(A,B):-
