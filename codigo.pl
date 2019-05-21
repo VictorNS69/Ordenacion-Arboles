@@ -73,9 +73,20 @@ comparar_listas([A|_],[B|_]):-
 	false.
 
 % dada una lista, devuelve otra con las hojas que compondrán el árbol	
-%lista_hojas([1,2,3],Hojas)
-%Hojas = [tree(1,void,void),tree(2,void,void),tree(3,void,void)]
 lista_hojas([],[]).
 lista_hojas([L|Resto],[tree(L,void,void)|H]):-
 	lista_hojas(Resto,H).
 
+%hojas_arbol
+%Programar un predicado hojas arbol(Hoja, Com, Arbol) que, dada la lista de hojas devuelve el
+%´arbol flotante inicial:
+%tree(1,tree(1,tree(1,void,void),tree(2,void,void)),tree(3,void,void))
+%hojas_arbol([],_,[]).
+hojas_arbol([],_,_).
+hojas_arbol(tree(A,B,C),_,tree(A,B,C)).
+hojas_arbol([Hoja,Hoja2|Resto],Comp,Arbol):-
+	menor(Hoja,Hoja2,Comp,M),
+	arg(1,M,I),
+	%append(Arbol,[tree(I,Hoja,Hoja2)],AR),
+	Arbol=tree(I,Hoja,Hoja2),
+	hojas_arbol(Resto,Comp,Arbol).
