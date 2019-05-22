@@ -5,8 +5,6 @@ alumno_prode('Ayllon','Carmona','Alejandro','X150251').
 alumno_prode('Perez','Morgera','Daniel','X150284').
 
 % devuelve en M el menor entre A y B usando Comp como criterio de comparación.
-
-
 menor(A,B,Comp,M):-
 	functor(X,Comp,2),
 	arg(1,X,A),
@@ -63,10 +61,7 @@ lista_hojas([],[]).
 lista_hojas([L|Resto],[tree(L,void,void)|H]):-
 	lista_hojas(Resto,H).
 
-%hojas_arbol
-%Programar un predicado hojas arbol(Hoja, Com, Arbol) que, dada la lista de hojas devuelve el
-%´arbol flotante inicial:
-%tree(1,tree(1,tree(1,void,void),tree(2,void,void)),tree(3,void,void))
+% hojas_arbol(Hoja, Com, Arbol) que, dada la lista de hojas devuelve el arbol flotante inicial:
 %hojas_arbol([],_,[]).
 hojas_arbol([],_,_).
 hojas_arbol([tree(A,B,C)],_,tree(A,B,C)).
@@ -76,6 +71,8 @@ hojas_arbol([Hoja,Hoja2|Resto],Comp,Arbol):-
 	ArbolA=tree(I,Hoja,Hoja2),
 	hojas_arbol_aux(Resto,Comp,ArbolA,M,S),
 	Arbol=S.
+
+% Hace hojas_arbol recursivamente
 hojas_arbol_aux([],_,A,_,A):-!.
 hojas_arbol_aux([],_,tree(A,B,C),_,tree(A,B,C)).
 hojas_arbol_aux([Hoja1|Resto],Comp,Arbol,Gana,S):-
