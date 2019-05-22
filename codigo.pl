@@ -20,20 +20,6 @@ menor(A,B,Comp,M):-
 	\+ call(X),
 	M=B,!.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 % determina si su primer argumento es menor o igual al segundo
 menor_o_igual(A,B):-
 	functor(A,PA,_),
@@ -82,11 +68,21 @@ lista_hojas([L|Resto],[tree(L,void,void)|H]):-
 %´arbol flotante inicial:
 %tree(1,tree(1,tree(1,void,void),tree(2,void,void)),tree(3,void,void))
 %hojas_arbol([],_,[]).
-hojas_arbol([],_,_).
-hojas_arbol(tree(A,B,C),_,tree(A,B,C)).
+
 hojas_arbol([Hoja,Hoja2|Resto],Comp,Arbol):-
 	menor(Hoja,Hoja2,Comp,M),
 	arg(1,M,I),
-	%append(Arbol,[tree(I,Hoja,Hoja2)],AR),
 	Arbol=tree(I,Hoja,Hoja2),
-	hojas_arbol(Resto,Comp,Arbol).
+	hojas_arbol_aux(Resto,Comp,Arbol,M).
+hojas_arbol_aux([],_,_,_).
+hojas_arbol_aux(tree(A,B,C),_,tree(A,B,C),_).
+hojas_arbol_aux([Hoja1|Resto],Comp,Arbol,Gana):-
+	menor(Gana,Hoja1,Comp,M),
+	arg(1,M,I),
+	hojas_arbol_aux(Resto,Comp,tree(I,Arbol,Hoja1),M).
+
+% COMPROBAR SI LO QUE QUEDA ES HOJA PARA LA SIGUIENTE FUNCION (COMPARANDO VOIDS)
+% HACER PREDICADO AUXILIAR reflotar(ARBOL, COMP, NUEVOARBOL) PARA REFLOTAR EL ARBOL EN CADA ITERACION
+% EN DICHO PREDICADO HACER SUBARBOLES PARA VER SI SON HOJAS Y TAL
+% CUALQUIER DUDA MIRAR LA FOTO QUE HE PASADO POR EL GRUPO JAJA OMEGALUL
+
