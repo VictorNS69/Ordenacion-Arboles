@@ -72,14 +72,17 @@ lista_hojas([L|Resto],[tree(L,void,void)|H]):-
 hojas_arbol([Hoja,Hoja2|Resto],Comp,Arbol):-
 	menor(Hoja,Hoja2,Comp,M),
 	arg(1,M,I),
-	Arbol=tree(I,Hoja,Hoja2),
-	hojas_arbol_aux(Resto,Comp,Arbol,M).
-hojas_arbol_aux([],_,_,_).
-hojas_arbol_aux(tree(A,B,C),_,tree(A,B,C),_).
-hojas_arbol_aux([Hoja1|Resto],Comp,Arbol,Gana):-
+	ArbolA=tree(I,Hoja,Hoja2),
+	hojas_arbol_aux(Resto,Comp,ArbolA,M,S),
+	Arbol=S.
+hojas_arbol_aux([],_,A,_,A):-!.
+hojas_arbol_aux([],_,tree(A,B,C),_,tree(A,B,C)).
+hojas_arbol_aux([Hoja1|Resto],Comp,Arbol,Gana,S):-
 	menor(Gana,Hoja1,Comp,M),
 	arg(1,M,I),
-	hojas_arbol_aux(Resto,Comp,tree(I,Arbol,Hoja1),M).
+	ArbolA=tree(I,Arbol,Hoja1),
+	hojas_arbol_aux(Resto,Comp,ArbolA,M,S1),
+	S=S1.
 
 % COMPROBAR SI LO QUE QUEDA ES HOJA PARA LA SIGUIENTE FUNCION (COMPARANDO VOIDS)
 % HACER PREDICADO AUXILIAR reflotar(ARBOL, COMP, NUEVOARBOL) PARA REFLOTAR EL ARBOL EN CADA ITERACION
