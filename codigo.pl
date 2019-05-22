@@ -68,7 +68,8 @@ lista_hojas([L|Resto],[tree(L,void,void)|H]):-
 %´arbol flotante inicial:
 %tree(1,tree(1,tree(1,void,void),tree(2,void,void)),tree(3,void,void))
 %hojas_arbol([],_,[]).
-
+hojas_arbol([],_,_).
+hojas_arbol([tree(A,B,C)],_,tree(A,B,C)).
 hojas_arbol([Hoja,Hoja2|Resto],Comp,Arbol):-
 	menor(Hoja,Hoja2,Comp,M),
 	arg(1,M,I),

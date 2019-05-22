@@ -28,7 +28,10 @@ Autores:
 	
 	7- menor(a,b,<,M).
 		M=a
-		
+	
+	8- menor(3,4,menor_o_igual,M).
+		M=3
+
   menor_o_igual/2 Determina si su primer argumento es menor o igual al segundo de la siguiente manera:
   si su nombre es menor que el otro, si sus nombres son iguales pero su aridad es menor que el otro,
   si sus nombres y aridad son iguales pero alguno de los argumentos del primer termino es menor que 
@@ -56,6 +59,8 @@ Autores:
 
   lista_hojas/2 Dada una lista, devuelve otra con las hojas
   que compondrán el árbol
+  
+  Pruebas:
 
 	1- lista_hojas([1,2],H).
 		H = [tree(1,void,void),tree(2,void,void)]
@@ -69,4 +74,53 @@ Autores:
 	4- lista_hojas([a,b,c],H).
 		H = [tree(a,void,void),tree(b,void,void),tree(c,void,void)]
 
-		
+  hojas_arbol/3 Se le da una lista que contiene todas las hojas del arbol, se le pasa el comparador y en el ultimo argumento
+  quedará guardado el resultado de la operación. Esta regla se dedicará a construir un arbol con la lista dada, teniendo como
+  nodo raiz, el menor de todas las hojas.
+
+  Pruebas:
+
+	1- hojas_arbol([tree(2,void,void),tree(9,void,void),tree(4,void,void),tree(1,void,void),tree(3,void,void)],menor_o_igual,Arbol).
+
+Arbol = tree(1,tree(1,tree(2,tree(2,tree(2,void,void),tree(9,void,void)),tree(4,void,void)),tree(1,void,void)),tree(3,void,void)).
+
+yes
+
+	2- hojas_arbol([],menor_o_igual,Arbol).
+	
+	yes
+
+	3- hojas_arbol([tree(2,void,void),tree(4,void,void)],menor_o_igual,Arbol).
+
+	Arbol = tree(2,tree(2,void,void),tree(4,void,void)).
+	
+	yes
+
+	4- hojas_arbol([tree(7,void,void),tree(3,void,void),tree(4,void,void),tree(2,void,void)],menor_o_igual,Arbol).
+
+	Arbol = tree(2,tree(3,tree(3,tree(7,void,void),tree(3,void,void)),tree(4,void,void)),tree(2,void,void)).
+
+	yes
+
+	5- hojas_arbol([tree(7,void,void),tree(3,void,void),tree(4,void,void),tree(2,void,void)],@<,Arbol).
+
+	Arbol = tree(2,tree(3,tree(3,tree(7,void,void),void(3,void,void)),tree(4,void,void)),tree(2,void,void)).
+
+	yes
+
+	6- hojas_arbol([tree(2,void,void),tree(2,void,void),tree(3,void,void),tree(1,void,void)],menor_o_igual,Arbol).
+
+	Arbol = tree(1,tree(2,tree(2,tree(2,void,void),tree(2,void,void)),tree(3,void,void)),tree(1,void,void)).
+
+	yes
+
+	7- hojas_arbol([tree(2,void,void),tree(3,void,void),tree(2,void,void),tree(3,void,void)],menor_o_igual,Arbol).
+
+	Arbol = tree(2,tree(2,tree(2,void,void),tree(3,void,void)),tree(2,void,void)),tree(3,void,void)).
+
+	8- hojas_arbol([tree(1,void,void)],menor_o_igual,Arbol).
+
+	Arbol = tree(1,void,void).
+
+	yes
+	yes
