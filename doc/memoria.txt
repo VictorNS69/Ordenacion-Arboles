@@ -117,10 +117,11 @@ yes
 	7- hojas_arbol([tree(2,void,void),tree(3,void,void),tree(2,void,void),tree(3,void,void)],menor_o_igual,Arbol).
 
 	Arbol = tree(2,tree(2,tree(2,void,void),tree(3,void,void)),tree(2,void,void)),tree(3,void,void)).
+	
+	yes
 
 	8- hojas_arbol([tree(1,void,void)],menor_o_igual,Arbol).
 
 	Arbol = tree(1,void,void).
 
-	yes
 	yes
