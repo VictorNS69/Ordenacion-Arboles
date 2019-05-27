@@ -155,6 +155,7 @@ Autores:
 		Orden = [1,2,3,4,5].
 
   ordenar/3 Dada una lista de nodos hoja, devuelve esa misma lista ordenada según el comparador Comp pasado. Este predicado utiliza todos los anteriores.
+  Pruebas:
 	
 	1- ordenar([2,1,4,5,3,6],@<,Orden).
 
@@ -175,21 +176,3 @@ Autores:
 	5- ordenar([2,1,4,5,3,6],menor_o_igual,Orden).
 
 		Orden = [1,2,3,4,5,6].
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
