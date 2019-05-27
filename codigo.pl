@@ -82,33 +82,48 @@ hojas_arbol_aux([Hoja1|Resto],Comp,Arbol,Gana,S):-
 	hojas_arbol_aux(Resto,Comp,ArbolA,M,S1),
 	S=S1.
 
-% COMPROBAR SI LO QUE QUEDA ES HOJA PARA LA SIGUIENTE FUNCION (COMPARANDO VOIDS)
-% HACER PREDICADO AUXILIAR reflotar(ARBOL, COMP, NUEVOARBOL) PARA REFLOTAR EL ARBOL EN CADA ITERACION
-% EN DICHO PREDICADO HACER SUBARBOLES PARA VER SI SON HOJAS Y TAL
-% CUALQUIER DUDA MIRAR LA FOTO QUE HE PASADO POR EL GRUPO JAJA OMEGALUL
-%ordenacion(_,_,[_]).
+% Devuelve la misma lista sin el elemento E
+eliminar_elemento(E,[E|Z],Z).
+eliminar_elemento(E,[V|Z],[V|Y]):-
+	E\=V,
+	eliminar_elemento(E,Z,Y).
 
+% Extrae las hojas de un arbol
+extraer_hojas(void,A,B):-
+	[A,B].
+extraer_hojas(tree(X,void,void),A,B):-
+	append(A,[X],B).
+extraer_hojas(tree(_,L,R),A,B):-
+	(L\=void, R\=void),
+	extraer_hojas(L,A,X),
+	extraer_hojas(R,X,B).
 
-/*
-ordenacion_aux(tree(Id, void, void), EId, Comp, NT) :- 
-    Eid == Id,
-    NT = void.
+% Reflota un arbol sin la raiz R
+reflotar(A,Comp,R,NA):-
+	extraer_hojas(A,"",L2),
+	length(L2,Tam),
+	(Tam\=1)->
+		eliminar_elemento(R,L2,L3),
+		lista_hojas(L3,H),
+		hojas_arbol(H,Comp,NA);
+	NA=[].
 
-ordenacion_aux(T, EId, Comp, NT).
+% dado el árbol inicial, devuelve en Orden la lista ordenada.
+ordenacion(Arbol,Comp,Orden):-
+	ordenacion_aux(Arbol,Comp,_,Orden),!.
 
-T = tree(Id, Izq, Der)
-
-((Izq = tree(Id1, _, _), Id == Id1) -> 
-    NT = tree(NId, NIzq, Der),
-    ordenacion_aux(Izq, Comp, NIzq),
-    NIzq = tree(NIzqId, _,_),
-    menor(NIzqId DerId, Comp, NId)
-*/
+% Hace la recursividad de ordenacion
+ordenacion_aux([],_,NL,NL).
+ordenacion_aux(Arbol,Comp,Aux,Orden):-
+	Arbol=..ArbolLista,
+	arg(2,ArbolLista,RaizAux),
+	arg(1,RaizAux,Raiz),
+	append(Aux,[Raiz],NL),
+	reflotar(Arbol,Comp,Raiz,NA),
+	ordenacion_aux(NA,Comp,NL,Orden).
 
 % ordena una lista de números (transforma a hojas, luego a arbol y devuelve el orden)
 ordenar(Lista,Comp,Orden):-
 	lista_hojas(Lista,Lhojas),
 	hojas_arbol(Lhojas,Comp,Arbol),
 	ordenacion(Arbol,Comp,Orden).
-%	Orden=O.
-
