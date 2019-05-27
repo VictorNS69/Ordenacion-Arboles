@@ -9,27 +9,35 @@ Autores:
   Pruebas:
 	
 	1- menor(3,4,<,M).
+
 		M=3
 		
 	2- menor(3,4,>,M).
+
 		M=4
 		
 	3- menor(4,4,>,M).
+
 		no
 		
 	4- menor(4,4,>=,M).
+
 		M=4
 		
 	5- menor(4,4,=,M).
+
 		M=4
 		
 	6- menor(4,3,=,M).
+
 		no
 	
 	7- menor(a,b,<,M).
+
 		M=a
 	
 	8- menor(3,4,menor_o_igual,M).
+
 		M=3
 
   menor_o_igual/2 Determina si su primer argumento es menor o igual al segundo de la siguiente manera:
@@ -40,21 +48,27 @@ Autores:
   Pruebas:
 	
 	1- menor_o_igual([1],[1,2]).
+
 		yes.
 		
 	2- menor_o_igual(a(c(2)),b(1,2,2)).
+
 		yes.
 	
 	3- menor_o_igual(a(c),b(d)).
+
 		yes.
 		
 	4- menor_o_igual(a(1),b(1)).
+
 		yes.
 		
 	5- menor_o_igual(b(1),b(1)).
+
 		yes.
 		
 	6- menor_o_igual(p(a),q).
+
 		yes.
 
   lista_hojas/2 Dada una lista, devuelve otra con las hojas
@@ -63,15 +77,19 @@ Autores:
   Pruebas:
 
 	1- lista_hojas([1,2],H).
+
 		H = [tree(1,void,void),tree(2,void,void)]
 
 	2- lista_hojas([1,2,3],H).
+
 		H = [tree(1,void,void),tree(2,void,void),tree(3,void,void)]
 
 	3- lista_hojas([],H).
+
 		H = []
 
 	4- lista_hojas([a,b,c],H).
+
 		H = [tree(a,void,void),tree(b,void,void),tree(c,void,void)]
 
   hojas_arbol/3 Se le da una lista que contiene todas las hojas del arbol, se le pasa el comparador y en el ultimo argumento
@@ -82,46 +100,96 @@ Autores:
 
 	1- hojas_arbol([tree(2,void,void),tree(9,void,void),tree(4,void,void),tree(1,void,void),tree(3,void,void)],menor_o_igual,Arbol).
 
-Arbol = tree(1,tree(1,tree(2,tree(2,tree(2,void,void),tree(9,void,void)),tree(4,void,void)),tree(1,void,void)),tree(3,void,void)).
-
-yes
+		Arbol = tree(1,tree(1,tree(2,tree(2,tree(2,void,void),tree(9,void,void)),tree(4,void,void)),tree(1,void,void)),tree(3,void,void)).
 
 	2- hojas_arbol([],menor_o_igual,Arbol).
 	
-	yes
+		yes (no devuelve nada porque la lista de hojas esta vacia)
 
 	3- hojas_arbol([tree(2,void,void),tree(4,void,void)],menor_o_igual,Arbol).
 
-	Arbol = tree(2,tree(2,void,void),tree(4,void,void)).
+		Arbol = tree(2,tree(2,void,void),tree(4,void,void)).
 	
-	yes
-
 	4- hojas_arbol([tree(7,void,void),tree(3,void,void),tree(4,void,void),tree(2,void,void)],menor_o_igual,Arbol).
 
-	Arbol = tree(2,tree(3,tree(3,tree(7,void,void),tree(3,void,void)),tree(4,void,void)),tree(2,void,void)).
-
-	yes
+		Arbol = tree(2,tree(3,tree(3,tree(7,void,void),tree(3,void,void)),tree(4,void,void)),tree(2,void,void)).
 
 	5- hojas_arbol([tree(7,void,void),tree(3,void,void),tree(4,void,void),tree(2,void,void)],@<,Arbol).
 
-	Arbol = tree(2,tree(3,tree(3,tree(7,void,void),void(3,void,void)),tree(4,void,void)),tree(2,void,void)).
-
-	yes
+		Arbol = tree(2,tree(3,tree(3,tree(7,void,void),void(3,void,void)),tree(4,void,void)),tree(2,void,void)).
 
 	6- hojas_arbol([tree(2,void,void),tree(2,void,void),tree(3,void,void),tree(1,void,void)],menor_o_igual,Arbol).
 
-	Arbol = tree(1,tree(2,tree(2,tree(2,void,void),tree(2,void,void)),tree(3,void,void)),tree(1,void,void)).
-
-	yes
+		Arbol = tree(1,tree(2,tree(2,tree(2,void,void),tree(2,void,void)),tree(3,void,void)),tree(1,void,void)).
 
 	7- hojas_arbol([tree(2,void,void),tree(3,void,void),tree(2,void,void),tree(3,void,void)],menor_o_igual,Arbol).
 
-	Arbol = tree(2,tree(2,tree(2,void,void),tree(3,void,void)),tree(2,void,void)),tree(3,void,void)).
-	
-	yes
+		Arbol = tree(2,tree(2,tree(2,void,void),tree(3,void,void)),tree(2,void,void)),tree(3,void,void)).
 
 	8- hojas_arbol([tree(1,void,void)],menor_o_igual,Arbol).
 
-	Arbol = tree(1,void,void).
+		Arbol = tree(1,void,void).
 
-	yes
+  ordenacion/3 Dado un arbol flotante, devuelve una lista de nodos hoja ordenados según el comparador Comp pasado.
+
+  Pruebas:
+	
+	1- ordenacion(tree(1,tree(2,tree(5,tree(8,void,void),tree(5,void,void)),tree(2,void,void)),tree(1,void,void)),@<,Orden).
+	
+		Orden = [1,2,5,8].
+	
+	2- ordenacion(tree(1,tree(2,tree(5,tree(8,void,void),tree(5,void,void)),tree(2,void,void)),tree(1,void,void)),@=<,Orden).
+	
+		Orden = [1,2,5,8].
+
+	3- ordenacion(tree(5,tree(4,tree(4,tree(4,void,void),tree(2,void,void)),tree(3,tree(3,void,void),tree(1,void,void))),tree(5,void,void)),@>=,Orden).
+
+		Orden = [5,4,3,2,1].
+
+	4- ordenacion(tree(5,tree(4,tree(4,tree(4,void,void),tree(2,void,void)),tree(3,tree(3,void,void),tree(1,void,void))),tree(5,void,void)),@>,Orden).
+
+		Orden = [5,4,3,2,1].
+
+	5- ordenacion(tree(1,tree(1,tree(2,tree(4,void,void),tree(2,void,void)),tree(1,tree(3,void,void),tree(1,void,void))),tree(5,void,void)),menor_o_igual,Orden).
+
+		Orden = [1,2,3,4,5].
+
+  ordenar/3 Dada una lista de nodos hoja, devuelve esa misma lista ordenada según el comparador Comp pasado. Este predicado utiliza todos los anteriores.
+	
+	1- ordenar([2,1,4,5,3,6],@<,Orden).
+
+		Orden = [1,2,3,4,5,6].
+
+	2- ordenar([2,1,4,5,3,6],@=<,Orden).
+
+		Orden = [1,2,3,4,5,6].
+
+	3- ordenar([2,1,4,5,3,6],@>,Orden).
+
+		Orden = [6,5,4,3,2,1].
+
+	4- ordenar([2,1,4,5,3,6],@>=,Orden).
+
+		Orden = [6,5,4,3,2,1].
+
+	5- ordenar([2,1,4,5,3,6],menor_o_igual,Orden).
+
+		Orden = [1,2,3,4,5,6].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
