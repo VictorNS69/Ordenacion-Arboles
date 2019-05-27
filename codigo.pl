@@ -86,4 +86,29 @@ hojas_arbol_aux([Hoja1|Resto],Comp,Arbol,Gana,S):-
 % HACER PREDICADO AUXILIAR reflotar(ARBOL, COMP, NUEVOARBOL) PARA REFLOTAR EL ARBOL EN CADA ITERACION
 % EN DICHO PREDICADO HACER SUBARBOLES PARA VER SI SON HOJAS Y TAL
 % CUALQUIER DUDA MIRAR LA FOTO QUE HE PASADO POR EL GRUPO JAJA OMEGALUL
+%ordenacion(_,_,[_]).
+
+
+/*
+ordenacion_aux(tree(Id, void, void), EId, Comp, NT) :- 
+    Eid == Id,
+    NT = void.
+
+ordenacion_aux(T, EId, Comp, NT).
+
+T = tree(Id, Izq, Der)
+
+((Izq = tree(Id1, _, _), Id == Id1) -> 
+    NT = tree(NId, NIzq, Der),
+    ordenacion_aux(Izq, Comp, NIzq),
+    NIzq = tree(NIzqId, _,_),
+    menor(NIzqId DerId, Comp, NId)
+*/
+
+% ordena una lista de números (transforma a hojas, luego a arbol y devuelve el orden)
+ordenar(Lista,Comp,Orden):-
+	lista_hojas(Lista,Lhojas),
+	hojas_arbol(Lhojas,Comp,Arbol),
+	ordenacion(Arbol,Comp,Orden).
+%	Orden=O.
 
